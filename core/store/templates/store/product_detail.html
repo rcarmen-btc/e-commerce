@@ -1,0 +1,31 @@
+{% extends 'store/base.html' %}
+
+{% block title %}
+<title>
+    Product list
+</title>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:10px ; margin-top: 20px; border: 0px solid black; border-radius: 15px; ">
+
+        <br>
+        <h1>Product detail</h1>
+        <br>
+        <div class="d-flex" style="">
+            <div class="d-flex" style="">
+                <img src="{{ object.image.url }}" class="" alt="..." width="400">
+            </div>
+            <div class="d-flex flex-column p-4" style="background-color:;">
+                <h2 class="card-title">{{object.title}}</h2>
+                <p class="card-text">{{ object.description }}</p>
+                <p class="card-text"><strong>{{ object.price }}$</strong></p>
+                <div class="d-flex align-items-end flex-column" style="height: 200px;">
+                    <button type="button" class="btn btn-lg btn-block btn-primary mt-auto p-2">Add to card</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}

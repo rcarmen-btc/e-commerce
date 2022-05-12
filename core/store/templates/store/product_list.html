@@ -1,0 +1,77 @@
+{% extends 'store/base.html' %}
+
+{% block title %}
+    <title>
+        Product list    
+    </title>
+{% endblock %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Catalog</h1>
+        </div>
+    </div>
+</section>
+
+<ul class="nav nav-tabs justify-content-center">
+    {% if not curr_category %}
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'store:product_list'%}">All</a>
+    </li>
+    {% else %}
+        <a class="nav-link" href="{% url 'store:product_list'%}">All</a>
+    {% endif %}
+    {% for category in categories %}
+        {% if category.slug == curr_category %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'store:product_category_list' category.slug %}">{{ category }}</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:product_category_list' category.slug %}">{{ category }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% if not object_list %}
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <h4 class="fw-light">There is no items</h4>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+            {% for product in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="..." height="350">
+                            <div class="card-body">
+                                <a href="{% url 'store:product_detail' product.slug %}">
+                                    <h5 class="card-title">{{ product.title }}</h5>
+                                </a>
+                                <p class="card-text">{{ product.description | truncatewords:14 }}</p>
+                                <p class="card-text"><strong>{{ product.price }}$</strong></p>
+                                <a href="{% url 'store:product_detail' product.slug %}">
+                                    <button type="button" class="btn btn-dark">Read more...</button>
+                                </a>
+                                <a href="{% url 'store:product_detail' product.slug %}">
+                                <button type="button" class="btn btn-primary">Add to card</button>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
