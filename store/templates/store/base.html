@@ -16,11 +16,35 @@
   <body cz-shortcut-listen="true">
 <header>
   <div class="navbar navbar-dark bg-dark shadow-sm">
+
     <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <strong>Catalog</strong>
-        <a href="{% url 'store:product_create' %}">
-          <button type="button" style="margin-left:20px;" class="btn btn-lg btn-block btn-info mt-auto p-2">Add new item</button>
+      <a href="/store/" class="navbar-brand d-flex align-items-center">
+          {% if user.is_authenticated %}
+        <strong>{{ user.username }} </strong>
+        <a href="/accounts/logout">
+          <button type="button" style="" class="btn btn-lg btn-block btn-success mt-auto p-1">
+            <strong>
+              Log out
+            </strong>
+          </button>
+        </a>
+          {% else %}
+        <a href="{% url 'store:signup' %}">
+          <button type="button" style="" class="btn btn-lg btn-block btn-success mt-auto p-1">
+            Sign up
+          </button>
+        </a>
+        <a href="/accounts/login">
+          <button type="button" style="" class="btn btn-lg btn-block btn-success mt-auto p-1">
+            Sign in
+          </button>
+        </a>
+          {% endif %}
+        <a href="{% url 'store:product_create_class' %}">
+          <button type="button" style="margin-left:20px; border: 0px solid black; border-radius: 24px;" class="btn btn-lg btn-block btn-success mt-auto p-2"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg></button>
         </a>
       </a>
     </div>
@@ -41,6 +65,5 @@
     <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
-<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <div class="betternet-wrapper"></div></body>
 

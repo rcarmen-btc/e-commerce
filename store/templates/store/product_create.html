@@ -1,9 +1,8 @@
 {% extends 'store/base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="container" style="padding:50px">
-        <form action="" method="post">
+        <form action="{% url 'store:product_create_class' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Save" />
